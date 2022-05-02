@@ -16,12 +16,12 @@ python -m pip install -r requirements.txt
 --> ETAPE 1:
         Identifier et récuperer le lien du flux video donc voulez télécharger depuis la plateforme Youtube.com
         
-       ![demo 3](https://user-images.githubusercontent.com/84296565/166246694-8d890b85-d80c-4582-ac5f-9ea88500b06a.PNG)
+   ![demo 3](https://user-images.githubusercontent.com/84296565/166246694-8d890b85-d80c-4582-ac5f-9ea88500b06a.PNG)
 
 --> ETAPE 2:
         Coller le lien URL de la vidéo depuis le champs de lien
         
-        ![demo 6](https://user-images.githubusercontent.com/84296565/166246777-b61b3390-0b46-4681-937b-561086fefa27.PNG)
+   ![demo 6](https://user-images.githubusercontent.com/84296565/166246777-b61b3390-0b46-4681-937b-561086fefa27.PNG)
 
 
 --> ETAPE 3:

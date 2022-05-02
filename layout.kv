@@ -1,0 +1,219 @@
+<TooltipIconButton@MDIconButton+MDTooltip>
+<MyLayout>:
+    Screen:
+        name: "sc1"
+        id: sc1
+        size_hint: None, None
+        size: root.width, root.height
+
+        MDScreen:
+            md_bg_color: 1, 1, 1, 1
+            Image:
+                source: root.data_fond
+
+            Image:
+                pos_hint: {"center_x": .5, "center_y": .8}
+                size_hint: None, None
+                size: dp(200), dp(200)
+                source: root.data_logo
+
+
+            MDFloatingActionButtonSpeedDial:
+                id: id_floatindactionbutton
+                hint_animation: True
+                data: root.data1
+                root_button_anim: True
+                icon: "video"
+                opening_transition_button_rotation: "out_cubic"
+                bg_color_root_button: 1, 0, 0, .85
+                bg_color_stack_button: 1, 0, 0, .85
+                color_icon_stack_button: 1, 1, 1, 1
+                color_icon_root_button: 1, 1, 1, 1
+                callback: root.callback
+
+
+
+
+            MDSpinner:
+                id: id_spinner1
+                size_hint: None, None
+                size: dp(46), dp(46)
+                pos_hint: {"center_x": .5, "center_y": .2}
+                active: True
+                md_bg_color: 1, 1, 0, .85
+
+
+
+
+
+
+    Screen:
+        name: "sc2"
+        id: sc2
+        size_hint: None, None
+        size: root.width, root.height
+
+        MDScreen:
+            md_bg_color: 1, 1, 1, 1 #44/255, 79/255, 140/255, 1
+
+            MDBoxLayout:
+                orientation: "vertical"
+
+                MDToolbar:
+                    title: "Zentube"
+
+                    md_bg_color: 1, 0, 0, .8#0, 0, 128/255, 1
+                    elevation: 40
+
+                    MDIconButton:
+                        id: id_menu_icon
+                        icon: "menu"
+                        pos_hint: {"center_x": .2, "center_y": .5}
+                        on_release: root.check_option()
+                    #left_action_items: [["menu", lambda x: root.check_option1()]]
+                    MDSeparator:
+                        orientation: "vertical"
+                        height: 80
+                        width: 10
+                        color: 1, 1, 1, 1
+
+
+
+
+                    Image:
+                        source: root.data_logo
+                        size_hint: None, None
+                        size: 100, 80
+                        pos_hint: {"center": .5, "center_y": .5}
+                    MDSeparator:
+
+                        orientation: "vertical"
+                        height: 80
+                        width: 10
+                        color: 1, 1, 1, 1
+
+                MDScreen:
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    size_hint_y: dp(200)
+                    size: 680, 300
+                    Image:
+                        source: root.data_fond1
+
+                    MDCard:
+                        id: id_card
+                        size_hint: None, None
+                        size: 200, 90
+                        pos_hint: {"center_x": .7, "center_y": .65}
+                        elevation: 50
+                        md_bg_color: 1, 1, 1, 1
+
+                        Image:
+                            source: root.data_analyse
+                            size_hint: None, None
+                            size: dp(100), dp(80)
+                            pos_hint: {"center_x": .5, "center_y": .5}
+
+                        TooltipIconButton:
+                            icon: "file-eye"
+                            tooltip_text: "Option d'analyse du flux vidéo"
+                            pos_hint: {"center_x": .7, "center_y": .5}
+                            user_font_size: "64sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 102/255, 204/255, .85
+                            on_release: root.recovery_link(id_link_url.text)
+
+                    MDSpinner:
+                        id: id_spinner2
+                        size_hint: None, None
+                        size: dp(46), dp(46)
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        active: False
+                        md_bg_color: 1, 1, 0, .85
+
+
+                    MDCard:
+                        id: id_card
+                        size_hint: None, None
+                        size: 200, 90
+                        pos_hint: {"center_x": .7, "center_y": .35}
+                        elevation: 50
+                        md_bg_color: 1, 1, 1, 1
+
+                        Image:
+                            source: root.data_dowload
+                            size_hint: None, None
+                            size: dp(100), dp(100)
+                            pos_hint: {"center_x": .5, "center_y": .5}
+
+                        TooltipIconButton:
+                            icon: "archive-arrow-down"
+                            tooltip_text: "Téléchargement du média"
+                            pos_hint: {"center_x": .7, "center_y": .5}
+                            user_font_size: "64sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 102/255, 204/255, .85
+                            on_release: root.dowload_media(id_link_url.text)
+
+
+                    MDFloatLayout:
+                        size_hint: None, None
+                        size: dp(500), dp(80)
+
+                        MDTextFieldRound:
+                            id: id_link_url
+                            icon_left: "link"
+                            hint_text: "copier le lien de la video"
+
+                        MDFloatLayout:
+                            id: id_float_state_url
+                            size_hint: None, None
+                            size: root.width, dp(0)
+                            md_bg_color: 1, 0, 0, .85
+
+                            opacity: 0
+
+                            MDLabel:
+                                id: id_label_state_url
+                                text: "Lien récupéré: {}".format(id_link_url.text)
+                                pos_hint_x: {"center_x": .1}
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, .85
+                                opacity: 1
+
+
+                        MDFloatLayout:
+                            id: id_float_error
+                            size_hint: None, None
+                            size: root.width, dp(0)
+                            md_bg_color: 1, 0, 0, .85
+                            opacity: 0
+
+                            MDLabel:
+                                id: id_label_error
+                                text: root.state_url
+                                halign: "center"
+                                theme_text_color: "Custom"
+                                text_color: 1, 1, 1, .85
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

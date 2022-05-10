@@ -18,3 +18,14 @@ requests      ==     2.27.1
 setuptools    ==     62.1.0
 urllib3      ==      1.26.9
 wheel        ==      0.37.1
+altgraph    ==       0.17.2
+colorama ==            0.4.4
+decorator  ==          4.4.2
+future      ==        0.18.2
+imageio      ==      2.19.1
+imageio-ffmpeg ==    0.4.7
+moviepy         ==  1.0.3
+numpy           ==1.22.3
+pefile          ==2021.9.3
+proglog         == 0.1.10
+tqdm            == 4.64.0

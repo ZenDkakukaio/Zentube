@@ -1,3 +1,5 @@
+import os
+
 from kivy.uix.screenmanager import ScreenManager, FallOutTransition
 from kivymd.toast import toast
 from kivymd.uix.menu import  MDDropdownMenu
@@ -7,21 +9,25 @@ from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDIconButton, MDFlatButton
 from kivymd.uix.snackbar import Snackbar
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ListProperty
 from kivy.animation import Animation
 from kivy.metrics import dp
 from kivy.core.window import Window
+from kivymd.uix.filemanager import MDFileManager
 
 import webbrowser
-from pytube import YouTube
+from pytube import YouTube, Playlist
 from data_link import MyDataLink
+from moviepy.editor import *
+from os import listdir
+import re
 
 obj = MDApp()
 obj_data_link = MyDataLink()
 
 import json as js
 
-with open("media.json") as f:
+with open("media/media.json") as f:
     data = js.load(f)
 
 SAVE_PATH = "dowloaded"
@@ -35,6 +41,8 @@ class MyLayout(ScreenManager):
     data_fond1 = data["fond1"]["media3"]
     data_analyse = data["analyse"]["media4"]
     data_dowload = data["dowload"]["media5"]
+    data_convert = data["convert"]["media6"]
+    data_playlist = data["playlist"]["media7"]
     data1 = {
         'Accueil': 'youtube'
     }
@@ -45,11 +53,19 @@ class MyLayout(ScreenManager):
     }
     state_url = StringProperty()
 
+
     def __init__(self, **kwargs):
         super(MyLayout, self).__init__(**kwargs)
 
         self.a = ["theme", "A propos", "Quitter"]
         self.dialog = None
+        self.manager_open = False
+        self.file_manager = MDFileManager(
+            exit_manager=self.exit_manager,
+            select_path=self.select_path,
+            preview=True,
+            show_hidden_files=True
+        )
 
 
 
@@ -197,6 +213,78 @@ class MyLayout(ScreenManager):
     def get_url_github(self):
         path_1 = "https://github.com/ZenDkakukaio/Zentube/"
         webbrowser.open_new(path_1)
+
+
+
+
+
+
+    def convert(self):
+        self.file_manager.show('/')
+        self.file_manager.show_hidden_files = True
+        self.manager_open = True
+
+
+
+    def select_path(self, path):
+        toast("Sélectionner le chemin qui contient vos vidéos")
+
+        try:
+            self.exit_manager()
+            toast(path)
+
+            list_video_path = os.listdir(path)
+            for i in range(len(list_video_path)):
+                path_mp3_media = f'convert/mp3/audio{str(i)}.mp3'
+                self.mp4_to_mp3(f'{path}/{list_video_path[i]}', path_mp3_media)
+                toast(f"Convertion du médias-({i}) terminés...")
+
+
+
+        except Exception as E:
+            toast(str(E))
+
+
+
+
+    def exit_manager(self, *args):
+        self.manager_open = False
+        self.file_manager.close()
+
+    def mp4_to_mp3(self, mp4, mp3):
+        mp4_without_frames = AudioFileClip(mp4)
+        mp4_without_frames.write_audiofile(mp3)
+        mp4_without_frames.close()
+
+
+
+
+    def dowload_playlist(self, url_playlist):
+        playlist = Playlist(url_playlist)
+        playlist._video_regex = re.compile(r"\"url\":\"(/watch\?v=[\w-]*)")
+        toast('Nombre de vidéo de la Playlist: %s' % str(len(playlist.video_urls)))
+        for url in playlist.video_urls:
+
+            try:
+                toast(url)
+                self.ids.id_spinner2.active = True
+                yt = YouTube(url)
+                ys = yt.streams.get_highest_resolution()
+                ys.download(SAVE_PATH)
+                toast("téléchargement terminé...")
+                self.ids.id_spinner2.active = False
+                obj_data_link.insert_database(url)
+            except Exception as E:
+                state_url = f"Erreur de type --> {E}"
+                self.ids.id_label_error.text = state_url
+                anim_float_error_url = Animation(opacity=1, duration=.1, size=(Window.width, dp(0)))
+                anim_float_error_url += Animation(opacity=1, duration=10, size=(Window.width, dp(100)))
+                anim_float_error_url += Animation(opacity=0, duration=5, size=(Window.width, dp(0)))
+                anim_float_error_url.start(self.ids.id_float_error)
+                anim_label_state_url = Animation(opacity=1, duration=10)
+                anim_label_state_url += Animation(opacity=0, duration=5)
+                anim_label_state_url.start(self.ids.id_label_error)
+
 
 
 

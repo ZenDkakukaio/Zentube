@@ -92,7 +92,8 @@
                         width: 10
                         color: 1, 1, 1, 1
 
-                MDScreen:
+                MDFloatLayout:
+                    id: id_general_floatlayout
                     pos_hint: {"center_x": .5, "center_y": .5}
                     size_hint_y: dp(200)
                     size: 680, 300
@@ -102,25 +103,74 @@
                     MDCard:
                         id: id_card
                         size_hint: None, None
-                        size: 200, 90
-                        pos_hint: {"center_x": .7, "center_y": .65}
+                        size: 350, 90
+                        pos_hint: {"center_x": .7, "center_y": .85}
                         elevation: 50
                         md_bg_color: 1, 1, 1, 1
 
                         Image:
                             source: root.data_analyse
                             size_hint: None, None
-                            size: dp(100), dp(80)
+                            size: dp(150), dp(80)
                             pos_hint: {"center_x": .5, "center_y": .5}
 
                         TooltipIconButton:
                             icon: "file-eye"
                             tooltip_text: "Option d'analyse du flux vidéo"
-                            pos_hint: {"center_x": .7, "center_y": .5}
+                            pos_hint: {"center_x": .9, "center_y": .5}
                             user_font_size: "64sp"
                             theme_text_color: "Custom"
                             text_color: 0, 102/255, 204/255, .85
                             on_release: root.recovery_link(id_link_url.text)
+
+
+                    MDCard:
+                        id: id_card
+                        size_hint: None, None
+                        size: 350, 90
+                        pos_hint: {"center_x": .7, "center_y": .65}
+                        elevation: 50
+                        md_bg_color: 1, 1, 1, 1
+
+                        Image:
+                            source: root.data_convert
+                            size_hint: None, None
+                            size: dp(150), dp(80)
+                            pos_hint: {"center_x": .5, "center_y": .5}
+
+                        TooltipIconButton:
+                            icon: "file-music"
+                            tooltip_text: "Outil de conversion MP4 --> MP3"
+                            pos_hint: {"center_x": .85, "center_y": .5}
+                            user_font_size: "64sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 102/255, 204/255, .85
+                            on_release: root.convert()
+
+
+                    MDCard:
+                        id: id_card
+                        size_hint: None, None
+                        size: 350, 90
+                        pos_hint: {"center_x": .7, "center_y": .45}
+                        elevation: 50
+                        md_bg_color: 1, 1, 1, 1
+
+                        Image:
+                            source: root.data_playlist
+                            size_hint: None, None
+                            size: dp(150), dp(80)
+                            pos_hint: {"center_x": 5, "center_y": .5}
+
+                        TooltipIconButton:
+                            icon: "clipboard-text-play"
+                            tooltip_text: "Téléchargement de la Playlist"
+                            pos_hint: {"center_x": .85, "center_y": .5}
+                            user_font_size: "64sp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 102/255, 204/255, .85
+                            on_release: root.dowload_playlist(id_link_url.text)
+
 
                     MDSpinner:
                         id: id_spinner2
@@ -134,21 +184,21 @@
                     MDCard:
                         id: id_card
                         size_hint: None, None
-                        size: 200, 90
-                        pos_hint: {"center_x": .7, "center_y": .35}
+                        size: 350, 90
+                        pos_hint: {"center_x": .7, "center_y": .25}
                         elevation: 50
                         md_bg_color: 1, 1, 1, 1
 
                         Image:
                             source: root.data_dowload
                             size_hint: None, None
-                            size: dp(100), dp(100)
+                            size: dp(150), dp(100)
                             pos_hint: {"center_x": .5, "center_y": .5}
 
                         TooltipIconButton:
                             icon: "archive-arrow-down"
                             tooltip_text: "Téléchargement du média"
-                            pos_hint: {"center_x": .7, "center_y": .5}
+                            pos_hint: {"center_x": .85, "center_y": .5}
                             user_font_size: "64sp"
                             theme_text_color: "Custom"
                             text_color: 0, 102/255, 204/255, .85
@@ -156,8 +206,10 @@
 
 
                     MDFloatLayout:
+                        id: id_floatlayout_for_url
                         size_hint: None, None
                         size: dp(500), dp(80)
+                        opacity: 1
 
                         MDTextFieldRound:
                             id: id_link_url

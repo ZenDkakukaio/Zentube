@@ -16,20 +16,23 @@ python -m pip install -r requirements.txt
 --> ETAPE 1:
         Identifier et récuperer le lien du flux video donc voulez télécharger depuis la plateforme Youtube.com
         
-   ![demo 3](https://user-images.githubusercontent.com/84296565/166246694-8d890b85-d80c-4582-ac5f-9ea88500b06a.PNG)
+   
+![zentube1_0_1](https://user-images.githubusercontent.com/84296565/167687199-c9aaad8b-fe26-49ef-aa45-7a7d5ac9b6ae.PNG)
 
 --> ETAPE 2:
         Coller le lien URL de la vidéo depuis le champs de lien
         
-   ![demo 6](https://user-images.githubusercontent.com/84296565/166246777-b61b3390-0b46-4681-937b-561086fefa27.PNG)
+   ![zentube1_0_3](https://user-images.githubusercontent.com/84296565/167687327-36a2fe46-0af3-4951-8749-db2cf9b2c2f8.PNG)
+
 
 
 --> ETAPE 3:
       Cliquer sur le boutton Analyse pour analyser le lien correspondant au flux vidéo
-      ![demo 7](https://user-images.githubusercontent.com/84296565/166246821-838c62e3-7e1c-4772-b66a-7f8ec941441d.PNG)
+      
 
       
-      
+   ![zentube1_0_2](https://user-images.githubusercontent.com/84296565/167687454-d63c3c35-745b-4b7f-97b4-a418aa2505f0.PNG)
+
       
 --> ETAPE 4:
       Après analayse du lien, cliquer le boutton de téléchargement pour enrégistrer votre vidéo.
